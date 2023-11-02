@@ -1,0 +1,275 @@
+[gd_scene load_steps=9 format=3 uid="uid://ddhn73rb75mys"]
+
+[ext_resource type="Texture2D" uid="uid://dqw65wlduqxps" path="res://27124.jpg" id="1_5cuvt"]
+[ext_resource type="Texture2D" uid="uid://dobrqu513p7ej" path="res://key_807241.png" id="1_atacl"]
+[ext_resource type="Texture2D" uid="uid://haqhfa37jksy" path="res://18166.jpg" id="2_ynara"]
+[ext_resource type="Script" path="res://trivia.gd" id="4_360ud"]
+[ext_resource type="Script" path="res://addons/godot_gpt/gpt_chat_request.gd" id="4_xdl22"]
+
+[sub_resource type="Theme" id="Theme_jt8f2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohncv"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkm8t"]
+bg_color = Color(0, 0, 0.392157, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 800.0
+offset_bottom = 380.0
+
+[node name="Question" type="Panel" parent="Control/Panel"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 400.0
+offset_bottom = 340.0
+theme = SubResource("Theme_jt8f2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ohncv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/Question"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 390.0
+offset_bottom = 300.0
+alignment = 1
+
+[node name="Question" type="RichTextLabel" parent="Control/Panel/Question/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+bbcode_enabled = true
+text = "[center][color=white]Your text here[/color][/center]"
+fit_content = true
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="Answer" type="Panel" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 40.0
+offset_right = 800.0
+offset_bottom = 340.0
+theme = SubResource("Theme_jt8f2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wkm8t")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/Answer"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 390.0
+offset_bottom = 300.0
+alignment = 1
+
+[node name="Answer" type="RichTextLabel" parent="Control/Panel/Answer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][color=white]Your text here[/color][/center]"
+fit_content = true
+
+[node name="Shark" type="LineEdit" parent="Control/Panel/Answer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 900.0
+offset_top = 250.0
+offset_right = 1100.0
+offset_bottom = 290.0
+editable = false
+
+[node name="Menu" type="HBoxContainer" parent="Control/Panel"]
+visible = false
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 40.0
+
+[node name="Round" type="Button" parent="Control/Panel/Menu"]
+visible = false
+layout_mode = 2
+text = "New Round"
+
+[node name="Skip" type="Button" parent="Control/Panel/Menu"]
+layout_mode = 2
+text = "Next"
+
+[node name="Key" type="HBoxContainer" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 600.0
+offset_bottom = 40.0
+
+[node name="Change" type="Button" parent="Control/Panel/Key"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_atacl")
+icon_alignment = 2
+
+[node name="Value" type="LineEdit" parent="Control/Panel/Key"]
+layout_mode = 2
+placeholder_text = "******"
+editable = false
+
+[node name="Lang" type="HBoxContainer" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 600.0
+offset_right = 800.0
+offset_bottom = 40.0
+alignment = 2
+
+[node name="HU" type="Button" parent="Control/Panel/Lang"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_5cuvt")
+flat = true
+icon_alignment = 2
+
+[node name="EN" type="Button" parent="Control/Panel/Lang"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("2_ynara")
+icon_alignment = 2
+
+[node name="Players" type="HBoxContainer" parent="Control/Panel"]
+layout_mode = 0
+offset_top = 340.0
+offset_right = 766.0
+offset_bottom = 380.0
+
+[node name="Player1" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "Goliath: "
+flat = true
+
+[node name="Points1" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "00"
+flat = true
+
+[node name="Separator1" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "|"
+flat = true
+
+[node name="Player2" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "KrisX: "
+flat = true
+
+[node name="Points2" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "00"
+flat = true
+
+[node name="Separator2" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "|"
+flat = true
+
+[node name="Player3" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "Lionall: "
+flat = true
+
+[node name="Points3" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "00"
+flat = true
+
+[node name="Separator3" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "|"
+flat = true
+
+[node name="Player4" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "Ombra: "
+flat = true
+
+[node name="Points4" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "00"
+flat = true
+
+[node name="Separator4" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "|"
+flat = true
+
+[node name="Player5" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "sugo: "
+flat = true
+
+[node name="Points5" type="Button" parent="Control/Panel/Players"]
+layout_mode = 2
+focus_mode = 0
+text = "00"
+flat = true
+
+[node name="Camera2D" type="Camera2D" parent="Control"]
+offset = Vector2(400, 190)
+
+[node name="KeyInput" type="LineEdit" parent="."]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 140.0
+offset_top = 5.0
+offset_right = 640.0
+offset_bottom = 36.0
+grow_horizontal = 2
+
+[node name="chat" type="Control" parent="." node_paths=PackedStringArray("gpt")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_360ud")
+gpt = NodePath("GPTChatRequest")
+
+[node name="GPTChatRequest" type="HTTPRequest" parent="chat"]
+script = ExtResource("4_xdl22")
+
+[connection signal="pressed" from="Control/Panel/Key/Change" to="chat" method="_on_change_pressed"]
+[connection signal="pressed" from="Control/Panel/Lang/HU" to="chat" method="_on_hu_pressed"]
+[connection signal="pressed" from="Control/Panel/Lang/EN" to="chat" method="_on_en_pressed"]
+[connection signal="text_submitted" from="KeyInput" to="chat" method="_on_key_input_text_submitted"]
