@@ -32,7 +32,7 @@ func read_api_key():
 func _on_gpt_request_completed(response_text: String):
 	add_text_to_chat(response_text)
 
-func _input_(event):
+func _input(_event):
 	c = 1
 	if Input.is_physical_key_pressed(KEY_SPACE):
 		querry()
