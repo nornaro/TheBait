@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2r2ltsdkqo7h"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_lwi6o"]
+
+[sub_resource type="Theme" id="Theme_4rnrt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b552n"]
+draw_center = false
+
+[node name="Player" type="BoxContainer" groups=["player"]]
+offset_right = 150.0
+offset_bottom = 33.0
+script = ExtResource("1_lwi6o")
+
+[node name="Name" type="LineEdit" parent="."]
+layout_mode = 2
+focus_mode = 1
+theme = SubResource("Theme_4rnrt")
+theme_override_constants/outline_size = 0
+theme_override_styles/focus = SubResource("StyleBoxFlat_b552n")
+expand_to_text_length = true
+context_menu_enabled = false
+flat = true
+select_all_on_focus = true
+
+[node name="Colon" type="Label" parent="."]
+layout_mode = 2
+text = ":"
+
+[node name="Points" type="Label" parent="."]
+layout_mode = 2
+text = "00"
+
+[node name="Separator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[connection signal="text_submitted" from="Name" to="." method="_on_name_text_submitted"]

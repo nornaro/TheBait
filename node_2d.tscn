@@ -33,7 +33,18 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Node2D" type="Node2D"]
+[node name="chat" type="Control" node_paths=PackedStringArray("gpt") groups=["main"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_360ud")
+gpt = NodePath("GPTChatRequest")
+
+[node name="GPTChatRequest" type="HTTPRequest" parent="."]
+script = ExtResource("4_xdl22")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -116,9 +127,14 @@ visible = false
 layout_mode = 2
 text = "Next"
 
-[node name="Source" type="LineEdit" parent="Control/Panel/Menu"]
+[node name="Source" type="LinkButton" parent="Control/Panel/Menu"]
+unique_name_in_owner = true
+layout_direction = 1
 layout_mode = 2
-editable = false
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+text = "Wiki"
 
 [node name="Key" type="HBoxContainer" parent="Control/Panel"]
 layout_mode = 0
@@ -158,100 +174,39 @@ icon = ExtResource("2_ynara")
 icon_alignment = 2
 
 [node name="Players" type="HBoxContainer" parent="Control/Panel"]
-layout_mode = 0
-offset_top = 340.0
-offset_right = 766.0
-offset_bottom = 380.0
-
-[node name="Player1" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "Goliath: "
-flat = true
-
-[node name="Points1" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "00"
-flat = true
-
-[node name="Separator1" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "|"
-flat = true
-
-[node name="Player2" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "KrisX: "
-flat = true
-
-[node name="Points2" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "00"
-flat = true
-
-[node name="Separator2" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "|"
-flat = true
-
-[node name="Player3" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "Lionall: "
-flat = true
-
-[node name="Points3" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "00"
-flat = true
-
-[node name="Separator3" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "|"
-flat = true
-
-[node name="Player4" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "Ombra: "
-flat = true
-
-[node name="Points4" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "00"
-flat = true
-
-[node name="Separator4" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "|"
-flat = true
-
-[node name="Player5" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "sugo: "
-flat = true
-
-[node name="Points5" type="Button" parent="Control/Panel/Players"]
-layout_mode = 2
-focus_mode = 0
-text = "00"
-flat = true
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Camera2D" type="Camera2D" parent="Control"]
 offset = Vector2(400, 190)
 
+[node name="Add" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 338.0
+offset_right = 800.0
+offset_bottom = 369.0
+text = "+"
+
+[node name="Reset" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 353.0
+offset_right = 800.0
+offset_bottom = 384.0
+text = "-"
+
 [node name="KeyInput" type="LineEdit" parent="."]
 visible = false
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 140.0
@@ -260,20 +215,7 @@ offset_right = 640.0
 offset_bottom = 36.0
 grow_horizontal = 2
 
-[node name="chat" type="Control" parent="." node_paths=PackedStringArray("gpt")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_360ud")
-gpt = NodePath("GPTChatRequest")
-
-[node name="GPTChatRequest" type="HTTPRequest" parent="chat"]
-script = ExtResource("4_xdl22")
-
-[connection signal="pressed" from="Control/Panel/Key/Change" to="chat" method="_on_change_pressed"]
-[connection signal="pressed" from="Control/Panel/Lang/HU" to="chat" method="_on_hu_pressed"]
-[connection signal="pressed" from="Control/Panel/Lang/EN" to="chat" method="_on_en_pressed"]
-[connection signal="text_submitted" from="KeyInput" to="chat" method="_on_key_input_text_submitted"]
+[connection signal="pressed" from="Control/Panel/Key/Change" to="." method="_on_change_pressed"]
+[connection signal="pressed" from="Control/Panel/Lang/HU" to="." method="_on_hu_pressed"]
+[connection signal="pressed" from="Control/Panel/Lang/EN" to="." method="_on_en_pressed"]
+[connection signal="text_submitted" from="KeyInput" to="." method="_on_key_input_text_submitted"]
