@@ -102,7 +102,6 @@ offset_bottom = 290.0
 editable = false
 
 [node name="Menu" type="HBoxContainer" parent="Control/Panel"]
-visible = false
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 40.0
@@ -113,8 +112,13 @@ layout_mode = 2
 text = "New Round"
 
 [node name="Skip" type="Button" parent="Control/Panel/Menu"]
+visible = false
 layout_mode = 2
 text = "Next"
+
+[node name="Source" type="LineEdit" parent="Control/Panel/Menu"]
+layout_mode = 2
+editable = false
 
 [node name="Key" type="HBoxContainer" parent="Control/Panel"]
 layout_mode = 0

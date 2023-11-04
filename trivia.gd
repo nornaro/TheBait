@@ -51,9 +51,9 @@ func querry():
 		state = !state
 		var err: Error
 		if !first:
-			err = gpt.gpt_chat_request("Next from different topic in " + language + "ahoer answer")
+			err = gpt.gpt_chat_request("Next from different topic in " + language)
 		if first:
-			err = gpt.gpt_chat_request("Pick a random theme ftom: weird history, weirduniverse, weird science. Pick a new, less known, unblelievable sounding, but true fact from wikipedia, regarding the picked one. Form a funy trivia-like stiking answer-question pair regarding it and 1-3 word regarding it in "+language+", return it as dict={question:x., answer:y} format - don't ask for dates, names, or values, do not repeat a question")
+			err = gpt.gpt_chat_request("Pick a random theme ftom: weird history, weird universe, weird science. Pick a new, less known, unblelievable sounding, but true fact from wikipedia, regarding the picked one. Form a funy trivia-like stiking answer-question pair regarding it and the answer shouldn't be more than few words in "+language+", return it as dict={question:x., answer:y, source:z} format - don't ask for dates, names, or values, do not repeat a question")
 			first = false
 		if err:
 			add_text_to_chat( "Failed to send request to ChatGPT API")
@@ -69,6 +69,8 @@ func add_text_to_chat(text) -> void:
 		return
 	%Question.text = "[center][color=white]"+trivia["question"]+"[/color][/center]"
 	%Answer.text = ""
+	$"../Control/Panel/Menu/Source".text = trivia["source"]
+	
 
 func _on_hu_pressed():
 	language = "hungarian"
